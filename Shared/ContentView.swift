@@ -8,24 +8,36 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        
-        VStack{
-            
-            Button {
-                
-            } label: {
-                Text("+")
-            }
-            .tint(.blue)
-            .buttonStyle(.borderedProminent)
-            .buttonBorderShape(.roundedRectangle(radius: 10))
-            .controlSize(.large)
-            .position(x: 380, y: 800)
+    
+    @State var count = 0
 
-            
-        }
+var body: some View {
         
+        ZStack{
+            
+            VStack{
+                
+                Text("You have pushed the button this many times:").padding()
+                Text(String(count)).padding()
+                
+            }
+            extractedFunc()
+        
+    }
+}
+
+
+func extractedFunc() -> some View {
+   Button {
+       count += 1
+   } label: {
+       Text("+")
+   }
+   .tint(.blue)
+   .buttonStyle(.borderedProminent)
+   .buttonBorderShape(.roundedRectangle(radius: 50))
+   .controlSize(.large)
+   .position(x: 380, y: 800)
     }
 }
 
