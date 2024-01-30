@@ -12,51 +12,53 @@ struct ContentView: View {
     @State var count = 0
     
     var body: some View {
-        
-//        NavigationView{
-            
-            ZStack{
-                
-                VStack{
-                    
-                    Text("You have pushed the button this many times:").padding()
-                    Text(String(count)).padding()
-                    
+        VStack {
+            AppBar()
+            GeometryReader{_ in
+                ZStack{
+                    VStack{
+                        Text("You have pushed the button this many times:")
+                        Text(String(count)).padding()
+                    }
+                    extractedFunc()
+                        .padding()
+                        .padding(.trailing)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
                 }
-                extractedFunc()
-                
             }
-            
-//            .navigationTitle("Basic app")
-            
-//        }
-                .overlay {
-                            ZStack {
-                                Color.clear
-                                    .background(.ultraThinMaterial)
-        
-                                Text("Navigation Bar")
-                                    .font(.largeTitle.weight(.bold))
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .padding(.leading, 20)
-                            }
-                            .frame(height: 70)
-                            .frame(maxHeight: .infinity, alignment: .top)
-                        }
+        }
     }
-    
     
     func extractedFunc() -> some View {
         Button {
             count += 1
         } label: {
-            Text("+")
+            Circle()
+                .fill(Color.blue)
+                .frame(width: 60, height: 60)
+                .shadow(radius: 5)
+                .overlay(
+                    Image(systemName: "plus")
+                        .font(.title)
+                        .foregroundColor(.white)
+                )
         }
-        .tint(.blue)
-        .buttonStyle(.borderedProminent)
-        .buttonBorderShape(.roundedRectangle(radius: 50))
-        .controlSize(.large)
-        .position(x: 380, y: 800)
+    }
+}
+
+struct AppBar : View {
+    var body: some View {
+        HStack {
+            Text("Flutter Demo Home Page")
+                .font(.title2)
+                .foregroundColor(Color.white)
+                .padding(.leading, 10)
+                .frame(alignment: .bottom)
+            Spacer()
+        }
+        .padding()
+        .background(Color.blue)
+        .shadow(radius: 5)
     }
 }
 
